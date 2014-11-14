@@ -26,12 +26,12 @@ package com.asgamer.basics1
 		{
 			x += vx;
 			
-			if (x > stageRef.stageWidth || x < 0)
+			if (x < stageRef.stageWidth || x > 0)
 				removeSelf();
 			
 			if (hitTestObject(target.hit))
 			{
-				trace("hitME");
+				target.takeHit();
 				stageRef.addChild(new Implosion(stageRef, x, y));
 				removeSelf();
 			}
@@ -39,6 +39,7 @@ package com.asgamer.basics1
 		
 		private function removeSelf() : void
 		{
+			removeEventListener(Event.ENTER_FRAME, loop);
 			if (stageRef.contains(this))
 				stageRef.removeChild(this)
 		}

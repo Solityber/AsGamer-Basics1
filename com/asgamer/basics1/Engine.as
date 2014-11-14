@@ -11,21 +11,26 @@ package com.asgamer.basics1
 		public static var enemyList:Array = new Array();
 		private var ourShip:Ship;
 		
-		public function Engine()
+		private var scoreHud:ScoreHud;
+		
+		public function Engine() : void
 		{
 
 			ourShip = new Ship(stage);
-			stage.addChild(ourShip);
-			
 			ourShip.x = stage.stageWidth / 2;
 			ourShip.y = stage.stageHeight / 2;
+			addEventListener(Event.ENTER_FRAME, loop, false, 0, true);
+			stage.addChild(ourShip);
+			
+			scoreHud = new ScoreHud(stage);
+			stage.addChild(scoreHud);
 			
 			for (var i:int = 0; i < numStars; i++)
 			{
 				stage.addChildAt(new Star(stage), stage.getChildIndex(ourShip));
 			}
 			
-			addEventListener(Event.ENTER_FRAME, loop, false, 0, true);
+			
 			
 		}
 		private function loop(e:Event) : void
@@ -39,6 +44,17 @@ package com.asgamer.basics1
 					enemyList.push(enemy);
 					stage.addChild(enemy);
 			}
+		}
+		
+		private function enemyKilled(e:Event) : void
+		{
+			scoreHud.updateKills(1);
+			scoreHud.updateScore(e.currentTarget.points);
+		}
+		
+		private function shipHit(e:Event) : void
+		{
+			scoreHud.updateHits(1);
 		}
 		
 		private function removeEnemy(e:Event)

@@ -108,5 +108,9 @@ package com.asgamer.basics1
 		{
 			canFire = true;
 		}
+		public function takeHit() : void
+		{
+			dispatchEvent(new Event("hit"));
+		}
 	}
 }

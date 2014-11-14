@@ -12,8 +12,11 @@ package com.asgamer.basics1
 		private var ay:Number = .2; //y acceleration
 		private var target:Ship;
 		
+		public var points:int = 1020;
+		
 		public function Stinger(stageRef:Stage, target:Ship) : void
 		{
+			stop();
 			this.stageRef = stageRef;
 			this.target = target;
 		
@@ -25,6 +28,9 @@ package com.asgamer.basics1
 		
 		private function loop(e:Event) : void
 		{
+			if (currentLabel != "destroyed")
+			{
+				
 			vy += ay;
 			y += vy;
 			
@@ -33,6 +39,10 @@ package com.asgamer.basics1
 			
 			if (y - 15 < target.y && y + 15 > target.y)
 				fireWeapon();
+			}
+			
+			if (currentLabel == "destroyedComplete")
+				removeSelf();
 		}
 		
 		private function removeSelf() : void
@@ -50,6 +60,16 @@ package com.asgamer.basics1
 		{
 			stageRef.addChild(new StingerBullet(stageRef, target, x, y, -8));
 			stageRef.addChild(new StingerBullet(stageRef, target, x, y, 8));
+		}
+			
+		public function takeHit() : void
+		{
+			if (currentLabel != "destroyed")
+			{
+				dispatchEvent(new Event("killed"));
+				rotation = Math.random() * 360;
+				gotoAndPlay("destroyed");
+			}
 		}
 	}
 }
