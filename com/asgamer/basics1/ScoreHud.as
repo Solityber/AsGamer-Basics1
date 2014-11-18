@@ -22,7 +22,7 @@ package com.asgamer.basics1
 			hits.text = "0";
 			score.text = "0";
 			
-			x = 10;
+			x = stageRef.stageWidth - width - 10;
 			y = stageRef.stageHeight - height - 10;
 			
 		}

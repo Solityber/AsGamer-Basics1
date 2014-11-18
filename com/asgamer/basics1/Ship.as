@@ -110,7 +110,8 @@ package com.asgamer.basics1
 		}
 		public function takeHit() : void
 		{
-			dispatchEvent(new Event("hit"));
+			dispatchEvent(new Event("shipHit"));
+			
 		}
 	}
 }

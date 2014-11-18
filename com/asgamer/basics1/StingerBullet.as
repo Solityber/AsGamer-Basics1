@@ -26,7 +26,7 @@ package com.asgamer.basics1
 		{
 			x += vx;
 			
-			if (x < stageRef.stageWidth || x > 0)
+			if (x > stageRef.stageWidth || x < 0)
 				removeSelf();
 			
 			if (hitTestObject(target.hit))

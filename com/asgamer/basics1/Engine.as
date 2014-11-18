@@ -30,6 +30,7 @@ package com.asgamer.basics1
 				stage.addChildAt(new Star(stage), stage.getChildIndex(ourShip));
 			}
 			
+			addEventListener(Event.ENTER_FRAME, loop, false, 0, true);
 			
 			
 		}
@@ -40,7 +41,9 @@ package com.asgamer.basics1
 			{
 					
 					var enemy:Stinger = new Stinger(stage, ourShip);
+					
 					enemy.addEventListener(Event.REMOVED_FROM_STAGE, removeEnemy, false, 0 , true);
+					enemy.addEventListener("killed", enemyKilled, false, 0, true);
 					enemyList.push(enemy);
 					stage.addChild(enemy);
 			}
@@ -59,7 +62,7 @@ package com.asgamer.basics1
 		
 		private function removeEnemy(e:Event)
 		{
-			enemyList.splice(enemyList.IndexOf(e.currentTarget), 1);
+			enemyList.splice(enemyList.indexOf(e.currentTarget), 1);
 		}
 	}
 }
